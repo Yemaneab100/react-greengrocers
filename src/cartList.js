@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const CartList = ({itemList, addTocart}) => {
+const CartList = ({itemList, handlAddItem}) => {
 
     return ( 
       <>
@@ -13,7 +13,7 @@ const CartList = ({itemList, addTocart}) => {
                   <div className="store--item-icon">
                     <img src={`/assets/icons/${item.id}.svg`} alt={item.name}/>
                   </div>
-                  <button onClick={() =>{ addTocart(item, item.price)}}>Add to cart</button>
+                  <button onClick={() => handlAddItem(item, item.price)}>Add to cart</button>
               </li>)
               })
             }

@@ -28,29 +28,45 @@ export default function App() {
   //     name: "",
   //     price: null
   //   }]
-  const [itemList, setItemList] = useState(initialStoreItems)
+  const itemList = initialStoreItems
   const [cart, setCart] = useState([])
   let [totalPrice, setTotalPrice] = useState(0);
-
-  const addTocart = (item, price) =>{
-    if(cart.indexOf(item) !== -1) return
-    setCart([...cart, item])
-    setTotalPrice(totalPrice+ price)
+  
+  
+  
+  
+  
+  const handlAddItem = (product) => {
+    const productExist = cart.find((item) => item.id === product.id);
+    if(productExist){
+      setCart(cart.map((item) => item.id === product.id 
+      ? {...productExist, quantity: productExist.quantity + 1}
+      :item
+      )
+      );
+      
+    }
+    else {
+      setCart([...cart, {...product, quantity: 1}])
+    }
+    
   }
 
-  const handleChange = (item, d) => {
-    const ind = cart.indexOf(item);
-    const arr = cart;
-    arr[ind].amount += d
-    
-    if(arr[ind].amount === 0) arr[ind].amount = 1;
-    setCart([...arr]);
+  const handlRemoveItem = (product) => {
+    const productExist = cart.find((item) => item.id === product.id);
+    if(productExist.quantity ===1 ){
+      setCart(cart.filter((item) => item.id !== product.id))
+    }
+    else{
+      cart.map((item) => item.id === product.id ? {...productExist, quantity: productExist.quantity -1}: item)
+    }
   }
   console.log(cart)
+
   return (
     <>
-      <CartList itemList = {itemList} addTocart = {addTocart}/>\
-      <YourCart cart={cart} setCart = {setCart} handleChange={handleChange} totalPrice ={totalPrice}/>
+      <CartList itemList = {itemList} handlAddItem = {handlAddItem}/>\
+      <YourCart cart={cart} setCart = {setCart} totalPrice ={totalPrice} handlAddItem ={handlAddItem} handlRemoveItem = {handlRemoveItem}/>
       <Footer />
     </>
   )

@@ -1,20 +1,7 @@
 import { useState } from "react";
 
-const YourCart = ({cart, setCart, handleChange, totalPrice}) => {
-    //const [price, setPrice] = useState(0);
-
-    // const handlePrcie = () => {
-    //     let ans = 0;
-    //     cart.map((item) => (
-    //         ans += item.price
-    //     ));
-    //     setPrice(ans);
-    // }
-    // let ans = 0;
-    // cart.map((item) => (
-    //     ans += item.price
-    // ));
-    // setPrice(ans);
+const YourCart = ({cart, handlAddItem, totalPrice, handlRemoveItem}) => {
+    
 
     return ( 
         <main id="cart">
@@ -23,22 +10,21 @@ const YourCart = ({cart, setCart, handleChange, totalPrice}) => {
             <ul className="item-list cart--item-list">
             
                 {
-                    cart.map((item) => {
+                    cart.map((item, index) => {
                         return (
-    
-                            <li key = {item.id}>
+                            <li key = {index}>
                                 <img
                                     className="cart--item-icon"
                                     src={`assets/icons/${item.id}.svg`}
                                     alt={item.name}
                                 />
                                 <p>{item.name}</p>
-                                <button className="quantity-btn remove-btn center" >-</button>
-                                <span className="quantity-text center">1</span>
-                                <button className="quantity-btn add-btn center" >+</button>
+                                <button className="quantity-btn remove-btn center" onClick={() => handlRemoveItem(item)}>-</button>
+                                <span className="quantity-text center">{item.quantity}</span>
+                                <button className="quantity-btn add-btn center" onClick={() => handlAddItem(item)}>+</button>
                             </li>
                         )
-                         
+                         ß
                     })
 
                 }
