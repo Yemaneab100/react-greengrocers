@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 const CartList = ({itemList, handlAddItem}) => {
 
     return ( 
@@ -9,12 +7,13 @@ const CartList = ({itemList, handlAddItem}) => {
           <ul className="item-list store--item-list">
             {
               itemList.map((item) => {
-                return (<li key={item.id}>
+                return (
+                <li key={item.id}>
                   <div className="store--item-icon">
                     <img src={`/assets/icons/${item.id}.svg`} alt={item.name}/>
                   </div>
-                  <button onClick={() => handlAddItem(item, item.price)}>Add to cart</button>
-              </li>)
+                  <button onClick={() => handlAddItem(item)}>Add to cart</button>
+                </li>)
               })
             }
           </ul>

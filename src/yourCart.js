@@ -1,7 +1,8 @@
 import { useState } from "react";
 
-const YourCart = ({cart, handlAddItem, totalPrice, handlRemoveItem}) => {
+const YourCart = ({cart, handlAddItem, handlRemoveItem}) => {
     
+    const totalPrice = cart.reduce((price, item) => price + item.quantity*item.price, 0); 
 
     return ( 
         <main id="cart">

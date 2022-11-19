@@ -3,31 +3,11 @@ import './styles/index.css'
 import CartList from './cartList'
 import YourCart from "./yourCart";
 import Footer from './footer'
-
 import { useState } from 'react'
 import initialStoreItems from './store-items'
 
-/*
-Here's what a store item should look like
-{
-  id: '001-beetroot',
-  name: 'beetroot',
-  price: 0.35
-}
-
-What should a cart item look like? 🤔
-*/
-
-// console.log(initialStoreItems)
-
 export default function App() {
-  // Setup state here...
-  // const emptyCart =  [
-  //   {
-  //     id: "",
-  //     name: "",
-  //     price: null
-  //   }]
+  
   const itemList = initialStoreItems
   const [cart, setCart] = useState([])
   let [totalPrice, setTotalPrice] = useState(0);
@@ -54,11 +34,11 @@ export default function App() {
 
   const handlRemoveItem = (product) => {
     const productExist = cart.find((item) => item.id === product.id);
-    if(productExist.quantity ===1 ){
+    if(productExist.quantity === 1){
       setCart(cart.filter((item) => item.id !== product.id))
     }
     else{
-      cart.map((item) => item.id === product.id ? {...productExist, quantity: productExist.quantity -1}: item)
+      setCart(cart.map((item) => item.id === product.id ? {...productExist, quantity: productExist.quantity -1}: item))
     }
   }
   console.log(cart)
@@ -66,7 +46,7 @@ export default function App() {
   return (
     <>
       <CartList itemList = {itemList} handlAddItem = {handlAddItem}/>\
-      <YourCart cart={cart} setCart = {setCart} totalPrice ={totalPrice} handlAddItem ={handlAddItem} handlRemoveItem = {handlRemoveItem}/>
+      <YourCart cart={cart}  handlAddItem ={handlAddItem} handlRemoveItem = {handlRemoveItem}/>
       <Footer />
     </>
   )
