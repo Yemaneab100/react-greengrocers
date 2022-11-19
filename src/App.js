@@ -35,7 +35,6 @@ export default function App() {
   const addTocart = (item, price) =>{
     if(cart.indexOf(item) !== -1) return
     setCart([...cart, item])
-
     setTotalPrice(totalPrice+ price)
   }
 
